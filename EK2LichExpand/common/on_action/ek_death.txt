@@ -1,0 +1,97 @@
+﻿ek_on_death = {
+	effect = {
+		if = {
+			limit = {
+				# You have Rule by Might succ
+				has_realm_law = rule_by_might_succession_law
+				
+				# The heir is one of your kids
+				primary_heir = { is_child_of = root }
+			}
+			save_scope_as = previous_ruler
+			primary_heir = { trigger_event = { id = ek_rbm.0001 days = 3 } }
+		}
+
+		if = {
+			limit = {
+				any_courtier = {
+					OR = {
+						has_character_flag = summoned_daedra
+						has_character_flag = summoned_undead
+					}
+				}
+			}
+			every_courtier = {
+				limit = {
+					has_character_flag = summoned_daedra
+				}
+				death = {
+					death_reason = death_returned_oblivion
+				}
+			}
+			every_courtier = {
+				limit = {
+					has_character_flag = summoned_undead
+				}
+				death = {
+					death_reason = death_crumbled_dust
+				}
+			}
+		}
+		
+		if = {
+			limit = { has_character_flag = mystical_birthright_next_hof }
+			save_scope_as = last_mbhof_potential
+			this.faith.religious_head = {
+				add_character_flag = { flag = last_mbhof_potential_died days = 3 }
+				trigger_event = { id = ek_mbhof.0001 days = 1 }
+			}
+		}
+
+		if = {
+			limit = { has_character_flag = lich_kings_next_hof }
+			save_scope_as = last_lkhof_potential
+			this.faith.religious_head = {
+				add_character_flag = { flag = last_lkhof_potential_died days = 3 }
+				trigger_event = { id = ek_lkhof.0001 days = 1 }
+			}
+		}
+		
+		### Potentate won against Attrebus, so they got to keep the Potentate until their death
+		if = {
+			limit = {
+				has_character_flag = flag_triumphant_potentate
+				has_title = title:e_cyrodiilic_potentate
+			}
+			destroy_title = title:e_cyrodiilic_potentate
+		}
+		
+		### Attrebus won against the Potentate, title is lost after his death
+		if = {
+			limit = {
+				has_character_flag = flag_triumphant_attrebus
+				has_title = title:e_cyrodiilic_potentate
+			}
+			
+			if = {
+				limit = { has_character_flag = flag_triumphant_attrebus_twice }
+				interregnum_post_shatter_effect = yes
+			}
+			else = {
+				# If Attrebus died before he can push for his claim, the Interregnum is triggered and the Elder Council seizes the Imperial Isle
+				interregnum_shatter_cyrodiil = yes
+			}
+		}
+	}
+	
+	events = {
+		ek_lifestyles.0001 # Character dies, notifies best friends and soul mates (Commune with the Dead)
+		divines.0001 # Sibyl of Dibella dies, let's find a new one
+		ek_attrebus_potentate.0201 # Attrebus vs Aixnieras: Attrebus dies during the war
+		ek_attrebus_potentate.0251 # Attrebus vs Aixnieras: Aixnieras dies during the war
+		ek_religious_decision.0501 # Saves an ancestor to be buried in Cath Bedraud
+		ek_ymis_decision_events.0003  # Necromancy tutor dies
+		ek_magic_ai_events.0007 # Character with reanimate corpse dies
+		ek_daedric_artifacts.9999 # daedric artifact cleanup
+	}
+}
