@@ -1,0 +1,20 @@
+﻿l_english:
+ # ek_lkhof.0001.t:0 "A New [ROOT.Char.GetFaith.ReligiousHeadName]"
+ # ek_lkhof.0001.desc:0 "As I approach my final days, the matter of succession becomes more and more pressing. I have guided us for as long as the acolytes can remember, as I seized power, so will my successor.\nI retreat to my chambers, feeling that these would be my last moments... Is this really the end?"
+ ek_lkhof.0001.t:0 "The Next [ROOT.Char.GetFaith.ReligiousHeadName]?"
+ ek_lkhof.0001.desc.last_lkhof_potential_died:0 "With the passing of [last_lkhof_potential.GetFirstName] I am left without a successor. I shall find a new apprentice to lead the [ROOT.Char.GetFaith.GetAdjective] after my death."
+ ek_lkhof.0001.desc.last_lkhof_potential_converted:0 "The unthinkable has happened. [last_lkhof_potential.GetFirstName] rejected the teachings of the [ROOT.Char.GetFaith.GetAdjective], and turned [last_lkhof_potential.GetHerHis] back on me. [last_lkhof_potential.GetHerHis|U] people, as after my death [last_lkhof_potential.GetSheHe] was to lead the faithful. I have no choice but to choose once more who will succeed me..."
+ ek_lkhof.0001.desc.other:0 "While I will lead the [ROOT.Char.GetFaith.GetAdjective] until my last breath, who will succeed me is still an important subject, as my empire will need to be protected."
+ ek_lkhof.0001.desc:0 "\n\nThere are a handful of bright prospects, and while some might be far away from here, all will answer the call.\n\nI need to meditate deep within my chambers, but in the end I will choose a worthy successor..."
+ ek_lkhof.0001.lkhof_potential_successor_1:0 "[lkhof_potential_successor_1.GetFirstName] will guide them."
+ ek_lkhof.0001.lkhof_potential_successor_1.tt:0 "After your death, [lkhof_potential_successor_1.GetFirstName] will become the new [lkhof_potential_successor_1.GetFaith.ReligiousHeadName] and lead the [lkhof_potential_successor_1.GetFaith.GetName] into a new age!"
+ ek_lkhof.0001.lkhof_potential_successor_2:0 "The signs are clear, [lkhof_potential_successor_2.GetFirstName] shall succeed me."
+ ek_lkhof.0001.lkhof_potential_successor_2.tt:0 "After your death, [lkhof_potential_successor_2.GetFirstName] will become the new [lkhof_potential_successor_2.GetFaith.ReligiousHeadName] and lead the [lkhof_potential_successor_2.GetFaith.GetName] into a new age!"
+ ek_lkhof.0001.lkhof_potential_successor_3:0 "I pray that [lkhof_potential_successor_3.GetFirstName] will be a better [ROOT.Char.GetFaith.ReligiousHeadName] than me..."
+ ek_lkhof.0001.lkhof_potential_successor_3.tt:0 "After your death, [lkhof_potential_successor_3.GetFirstName] will become the new [lkhof_potential_successor_3.GetFaith.ReligiousHeadName] and lead the [lkhof_potential_successor_3.GetFaith.GetName] into a new age!"
+ ek_lkhof.0001.lkhof_potential_successor_4:0 "I have always believed in [lkhof_potential_successor_4.GetFirstName]..."
+ ek_lkhof.0001.lkhof_potential_successor_4.tt:0 "After your death, [lkhof_potential_successor_4.GetFirstName] will become the new [lkhof_potential_successor_4.GetFaith.ReligiousHeadName] and lead the [lkhof_potential_successor_4.GetFaith.GetName] into a new age!"
+ 
+ # Creating the HoF title
+ faith_creation.1010.desc.lich_kings.personal:0 "after being chosen by fate I can now assume my place of [faith.ReligiousHeadName|U]."
+ faith_creation.1010.desc.lich_kings:0 "[HoF.GetFirstName], claiming to have been chosen by fate, now leads the [faith.GetAdjective] faithful as our new [faith.ReligiousHeadName|U]."
