@@ -181,10 +181,6 @@ clan_government = {
 				has_doctrine = doctrine_mystical_birthright_head
 				religious_head = root
 			}
-			faith = {
-				has_doctrine = doctrine_lich_kings_head
-				religious_head = root
-			}
 		}
 	}
 	
@@ -280,10 +276,6 @@ tribal_government = {
 		NOT = {
 			faith = {
 				has_doctrine = doctrine_mystical_birthright_head
-				religious_head = root
-			}
-			faith = {
-				has_doctrine = doctrine_lich_kings_head
 				religious_head = root
 			}
 		}
