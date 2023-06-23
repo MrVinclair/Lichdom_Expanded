@@ -1,0 +1,134 @@
+﻿# A title is transferred to a new character
+# root = the new holder
+# scope:title = the title that changes hands
+# scope:previous_holder = previous holder. Might be dead
+ek_on_title_gain = {	
+	effect = {
+		# If none of the holder's title is older than a month, and is not independent. Set their obligation to the default level
+
+		if = {
+			limit = {
+				NOT = {
+					any_held_title = {
+						title_held_years > 0
+					}
+				}
+				is_independent_ruler = no
+				NOR = {
+					has_government = feudal_government 
+					has_government = praxis_government
+				}
+			}
+			save_scope_as = vassal
+			scope:vassal.liege = { save_scope_as = liege }
+			vassal_update_obligations_type = yes
+		}
+		# Autocracy, update the county opinion modifier
+		if = {
+			limit = {
+				scope:title.tier = tier_county
+				OR = {
+					has_government = autocracy_government
+					scope:title = { has_autocracy_county_opinion_modifier = yes } # Some counties can be taken from autocracies by non-autocracies, so we update the modifier here
+				}
+			}
+			scope:title = { update_autocracy_county_opinion_modifier = yes }
+		}
+		
+		# Ceremoniarchy, set their praxis value to the base value.
+		if = {
+			limit = {
+				has_government = praxis_government
+				NOT = { has_variable = state_praxis }
+			}
+			set_starting_praxis = yes
+		}
+		
+		### If you're a pirate gov and it's a duchy+ title, give it the pirate succ law
+		if = {
+			limit = { has_government = pirate_government scope:title.tier >= tier_duchy }
+			scope:title = { add_title_law = pirate_elective_succession_law }
+		}
+		
+		else_if = {
+			limit = {
+				NOT = { has_government = pirate_government }
+				scope:title = { has_title_law = pirate_elective_succession_law }
+			}
+			scope:title = { clear_title_laws = yes }
+		}
+		
+		### Holder of the Imperial City: gets the modifiers
+		if = {
+			limit = { scope:title = title:c_imperial_city }
+			trigger_event = ek_imperial_city_modifiers.0001
+		}
+		
+		### Holder of Alinor gets the modifiers
+		if = {
+			limit = { scope:title = title:c_alinor }
+			trigger_event = ek_alinor_city_modifiers.0001
+		}
+		
+		### Attrebus expells the local Akaviri population
+		if = {
+			limit = {
+				has_character_flag = flag_tsaesci_act_passed
+				scope:title.tier = tier_county
+				scope:title.culture = { has_cultural_pillar = heritage_tsaesci }
+			}
+			attrebus_take_akaviri_county = { COUNTY = scope:title ATTREBUS = root }
+		}
+	}
+	events = {
+		north_tamriel.0001 # West and East Skyrim are reunited
+		north_tamriel.0011 # Solstheim gains control of Bleakrock Isle and Japhet's Folly
+		central_tamriel.0002 # Colovia + Nibenay united - Cyrodiil reformed
+		ek_maintenance.0001 # To fire the might makes right law maintenance
+		ek_mbhof.0001 #hierocracy succession
+		ek_lkhof.0001 #lich kings succession
+	}
+}
+
+# A title change makes the character rank up in the landed tiers (eg Duke -> King)
+# root = character ranking up
+# scope:title = old primary title
+ek_on_rank_up = { # Will not fire during history execution or for dying characters
+	effect = {
+		# Magic related traditions, update the mage/spellblade limit and effectiveness modifier
+		if = {
+			limit = { culture = { has_cultural_parameter = rank_gives_bonus_to_mage_maa } }
+			update_magocracy_mage_bonus_modifier = yes
+		}
+	}
+}
+
+# A title change makes the character rank down in the landed tiers (eg King -> Duke)
+# root = character ranking down
+# scope:title = old primary title
+ek_on_rank_down = { # Will not fire during history execution or for dying characters
+	effect = {
+		# Magic related traditions, update the mage/spellblade limit and effectiveness modifier
+		if = {
+			limit = { culture = { has_cultural_parameter = rank_gives_bonus_to_mage_maa } }
+			update_magocracy_mage_bonus_modifier = yes
+		}
+	}
+}
+
+# A character gains a vassal
+# root = character gaining vassal
+# scope:vassal = vassal being gained
+# scope:old_liege = the previous liege of the vassal. Might be the null character (vassal used to be a non-ruler or independent), so make sure to use "exists" checks where relevant
+ek_on_vassal_gained = {
+	effect = {
+		### Attrebus seizes land held by an Akaviri vassal
+		if = {
+			limit = {
+				scope:vassal.culture = { has_cultural_pillar = heritage_tsaesci }
+				scope:vassal.top_liege = { has_character_flag = flag_tsaesci_act_passed }
+			}
+			attrebus_take_akaviri_vassal = { VASSAL = scope:vassal ATTREBUS = scope:vassal.top_liege }
+		}
+	}
+}

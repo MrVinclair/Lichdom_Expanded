@@ -297,10 +297,10 @@ create_head_of_faith_title_effect = {
 						NOT = { exists = religious_head_title }
 					}
 				}
-				trigger_event = faith_creation.0004 # Creates new dynamic title
+				trigger_event = faith_creation.0006 # Creates new dynamic title
 			}
 			else = {
-				trigger_event = faith_creation.0014 # Re-uses existing title.
+				trigger_event = faith_creation.0016 # Re-uses existing title.
 			}
 		}
 		### EK EDIT: Ceremoniarchy HoF
